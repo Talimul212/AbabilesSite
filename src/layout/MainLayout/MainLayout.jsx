@@ -13,7 +13,7 @@ const MainLayout = () => {
           <SideBar />
         </div>
         <div className=" col-span-10 ">
-          <TopBar />
+          {/* <TopBar /> */}
           <Outlet />
         </div>
       </div>
