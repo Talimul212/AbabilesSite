@@ -1,20 +1,15 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useState } from "react";
+import SelectMenu from "../SelectMenu/SelectMenu";
+import { people } from "../../damoyData";
 
 const HomeFrom = () => {
+  const [selected, setSelected] = useState(people[0]);
   return (
     <div>
-      <div className="hero ">
-        <div className="hero-content flex-col lg:flex-row-reverse">
-          <div className="text-center lg:text-left">
-            <h1 className="text-5xl font-bold">Login now!</h1>
-            <p className="py-6">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-              et a id nisi.
-            </p>
-          </div>
-          <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+      <div className="w-[90%] mx-auto mt-10">
+        <div className=" grid grid-cols-12 gap-2">
+          <div className=" card w-full  card-bordered bg-base-100 col-span-8">
             <form className="card-body">
               <div className="form-control">
                 <label className="label">
@@ -47,6 +42,9 @@ const HomeFrom = () => {
                 <button className="btn btn-primary">Login</button>
               </div>
             </form>
+          </div>
+          <div className=" col-span-4">
+            <SelectMenu selected={selected} setSelected={setSelected} />
           </div>
         </div>
       </div>
