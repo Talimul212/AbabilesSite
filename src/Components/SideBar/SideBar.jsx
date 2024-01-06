@@ -7,7 +7,7 @@ import { RiLogoutCircleRLine } from "react-icons/ri";
 import logo from "../../assets/logo/ABABILLOGO.png";
 const SideBar = () => {
   return (
-    <div className=" h-full shadow-xl  mt-4 ">
+    <div className=" h-full shadow-xl  pt-4 bg-white">
       <div className="text-red-500 ">
         <img src={logo} alt="" className="w-48 h-20 mx-3" srcset="" />
       </div>

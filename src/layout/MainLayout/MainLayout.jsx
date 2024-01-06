@@ -8,8 +8,8 @@ const MainLayout = () => {
   const registor = location.pathname;
   return (
     <div>
-      <div className=" grid grid-cols-12">
-        <div className=" col-span-2  h-[100vh]">
+      <div className=" lg:grid grid-cols-12">
+        <div className=" col-span-2  lg:h-[100vh]">
           <SideBar />
         </div>
         <div className=" col-span-10 ">
