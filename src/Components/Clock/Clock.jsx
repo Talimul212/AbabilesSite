@@ -13,23 +13,34 @@ const Clock = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-  const formattedTime = (value) => (value < 10 ? `0${value}` : value);
+  const formattedTime = (value) => {
+    const formattedValue = value < 10 ? `0${value}` : value;
+    return formattedValue;
+  };
 
-  const hours = formattedTime(time.getHours());
+  const get12HourFormat = (hour) => {
+    return hour > 12 ? hour - 12 : hour === 0 ? 12 : hour;
+  };
+
+  const hours = formattedTime(get12HourFormat(time.getHours()));
   const minutes = formattedTime(time.getMinutes());
   const seconds = formattedTime(time.getSeconds());
+  const period = time.getHours() >= 12 ? "PM" : "AM";
 
   return (
-    <div className="flex flex-col">
-      <div className="stats  rounded-t-lg rounded-b-none">
-        <div className="stat place-items-center ">
+    <div className="flex flex-col ">
+      <div className="stats rounded-t-lg rounded-b-none ">
+        <div className="stat place-items-center h-[84px] flex justify-between">
           <div className="stat-title">Date:</div>
           <div className="stat-value text-cyan-400 text-xl">
             {time.toLocaleDateString()}
           </div>
+          <div className=" text-sm font-bold flex justify-center items-center  z-50  rounded-full shadow bg-cyan-400 text-white  w-8 h-8">
+            {period}
+          </div>
         </div>
       </div>
-      <div className="stats  mt-[-18px] rounded-t-none shadow-md">
+      <div className="stats mt-[-18px] rounded-t-none shadow-md rounded-lg">
         <div className="stat place-items-center">
           <div className="stat-title">Hours</div>
           <div className="stat-value text-xl">{hours}</div>

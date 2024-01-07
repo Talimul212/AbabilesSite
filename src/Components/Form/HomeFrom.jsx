@@ -4,15 +4,16 @@ import SelectMenu from "../SelectMenu/SelectMenu";
 import { people } from "../../damoyData";
 import moment from "moment";
 import Clock from "../Clock/Clock";
+import StoreList from "../StoreList/StoreList";
 
 const HomeFrom = () => {
   const [selected, setSelected] = useState(people[0]);
   //  time to create  {moment().format("LL")}
   return (
     <div>
-      <div className="w-[90%] mx-auto mt-10">
+      <div className=" mt-10">
         <div className=" grid grid-cols-12 gap-2">
-          <div className=" card lg:w-[97%] w-full  card-bordered bg-base-100 col-span-8">
+          <div className=" card lg:w-[97%] w-full  card-bordered rounded-lg bg-base-100 col-span-8">
             <p className="text-gray-400 text-sm mt-2"></p>
 
             <form className="card-body">
@@ -77,7 +78,7 @@ const HomeFrom = () => {
             </form>
           </div>
           <div className=" col-span-4">
-            <h1>Visit All Store</h1>
+            <StoreList />
           </div>
         </div>
       </div>

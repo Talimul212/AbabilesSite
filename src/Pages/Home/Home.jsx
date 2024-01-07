@@ -5,7 +5,7 @@ import HomeFrom from "../../Components/Form/HomeFrom";
 
 const Home = () => {
   return (
-    <div className=" ">
+    <div className="w-[90%] mx-auto ">
       <MediaCard />
       <HomeFrom />
     </div>
