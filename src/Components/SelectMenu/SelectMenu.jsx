@@ -17,22 +17,35 @@ const SelectMenu = ({ selected, setSelected }) => {
             Store List
           </Listbox.Label>
           <div className="relative mt-2">
-            <Listbox.Button className="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-400 sm:text-sm sm:leading-6">
-              <span className="flex items-center">
-                <img
-                  src={selected.avatar}
-                  alt=""
-                  className="h-5 w-5 flex-shrink-0 rounded-full"
-                />
-                <span className="ml-3 block truncate">{selected.name}</span>
-              </span>
-              <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
-                <ChevronUpDownIcon
-                  className="h-5 w-5 text-gray-400"
-                  aria-hidden="true"
-                />
-              </span>
-            </Listbox.Button>
+            {selected ? (
+              <Listbox.Button className="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-400 sm:text-sm sm:leading-6">
+                <span className="flex items-center">
+                  <span className="ml-3 block truncate">{selected.name}</span>
+                </span>
+                <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
+                  <ChevronUpDownIcon
+                    className="h-5 w-5 text-gray-400"
+                    aria-hidden="true"
+                  />
+                </span>
+              </Listbox.Button>
+            ) : (
+              <>
+                <Listbox.Button className="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-400 sm:text-sm sm:leading-6">
+                  <span className="flex items-center">
+                    <span className="ml-3 block truncate text-gray-400 font-semibold">
+                      Select the Shop
+                    </span>
+                  </span>
+                  <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
+                    <ChevronUpDownIcon
+                      className="h-5 w-5 text-gray-400"
+                      aria-hidden="true"
+                    />
+                  </span>
+                </Listbox.Button>
+              </>
+            )}
 
             <Transition
               show={open}
@@ -56,11 +69,6 @@ const SelectMenu = ({ selected, setSelected }) => {
                     {({ selected, active }) => (
                       <>
                         <div className="flex items-center">
-                          <img
-                            src={person.avatar}
-                            alt=""
-                            className="h-5 w-5 flex-shrink-0 rounded-full"
-                          />
                           <span
                             className={classNames(
                               selected ? "font-semibold" : "font-normal",

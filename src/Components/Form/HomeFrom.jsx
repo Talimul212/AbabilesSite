@@ -3,12 +3,22 @@ import React, { useState } from "react";
 import SelectMenu from "../SelectMenu/SelectMenu";
 import { people } from "../../damoyData";
 import moment from "moment";
-import Clock from "../Clock/Clock";
 import StoreList from "../StoreList/StoreList";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 const HomeFrom = () => {
-  const [selected, setSelected] = useState(people[0]);
-  //  time to create  {moment().format("LL")}
+  const [selected, setSelected] = useState(people[0] || {});
+  const orderDate = moment().format("LL");
+  const { register, handleSubmit, formState, reset } = useForm();
+  const onSubmit = (data) => {
+    const realData = { ...selected, orderDate, data };
+    console.log(realData);
+    toast.success(`Successfully order added to ${selected.name} shop`);
+    reset();
+    setSelected(people[null]);
+  };
+  const isSubmitDisabled = !formState.isValid;
   return (
     <div>
       <div className=" mt-10">
@@ -16,7 +26,7 @@ const HomeFrom = () => {
           <div className=" card lg:w-[97%] w-full  card-bordered rounded-lg bg-base-100 col-span-8">
             <p className="text-gray-400 text-sm mt-2"></p>
 
-            <form className="card-body">
+            <form onSubmit={handleSubmit(onSubmit)} className="card-body">
               <div className=" lg:flex justify-start">
                 <div className="">
                   <div className="lg:flex justify-start gap-10">
@@ -24,7 +34,12 @@ const HomeFrom = () => {
                       <label className="label">
                         <span className=" text-lg font-medium">Item</span>
                       </label>
-                      <select className=" card-bordered rounded-xl border-cyan-400 py-2 ps-2 w-[150px]">
+                      <select
+                        {...register("item", {
+                          required: true,
+                        })}
+                        className=" card-bordered rounded-xl border-cyan-400 py-2 ps-2 w-[150px]"
+                      >
                         <option>PVC</option>
                         <option>N card</option>
                         <option>Sicker</option>
@@ -37,6 +52,9 @@ const HomeFrom = () => {
                       </label>
                       <div className="flex justify-start items-center gap-6">
                         <input
+                          {...register("quentity", {
+                            required: true,
+                          })}
                           type="number"
                           placeholder="7 item"
                           className="card-bordered rounded-xl border-cyan-400 py-2 ps-2 w-[148px] lg:ml-[-7px]"
@@ -51,6 +69,9 @@ const HomeFrom = () => {
                     </label>
                     <div className="flex justify-start w-[400px] items-center gap-6">
                       <input
+                        {...register("hight", {
+                          required: true,
+                        })}
                         type="number"
                         placeholder="7 feet"
                         className="card-bordered rounded-xl border-cyan-400 py-2 ps-2 w-[34%]"
@@ -58,6 +79,9 @@ const HomeFrom = () => {
                       />
                       <div>X</div>
                       <input
+                        {...register("weight", {
+                          required: true,
+                        })}
                         type="number"
                         placeholder="3 feet"
                         className="card-bordered rounded-xl border-cyan-400 py-2 ps-2 w-[34%]"
@@ -71,7 +95,11 @@ const HomeFrom = () => {
                 </div>
               </div>
               <div className="form-control mt-6">
-                <button className=" btn btn-info bg-cyan-400 hover:bg-transparent text-white hover:text-cyan-400">
+                <button
+                  type="submit"
+                  disabled={isSubmitDisabled || !selected}
+                  className=" btn btn-info bg-cyan-400 hover:bg-transparent text-white hover:text-cyan-400"
+                >
                   Add To Store
                 </button>
               </div>
