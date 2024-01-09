@@ -98,9 +98,9 @@ const HomeFrom = () => {
                 <button
                   type="submit"
                   disabled={isSubmitDisabled || !selected}
-                  className=" btn btn-info bg-cyan-400 hover:bg-transparent text-white hover:text-cyan-400"
+                  className=" uppercase btn btn-info bg-cyan-400 hover:bg-transparent text-white hover:text-cyan-400"
                 >
-                  Add To Store
+                  Add To Shop
                 </button>
               </div>
             </form>

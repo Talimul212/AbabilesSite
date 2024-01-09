@@ -20,7 +20,7 @@ const SideBar = () => {
       </Link>
       <Link to="/admin">
         <div className="font-semibold text-lg hover:bg-cyan-400 hover:text-slate-50 hover:border-l-4 border-l-4 border-l-white hover:border-red-700 hover:py-1 py-1 flex justify-start items-center gap-12  text-cyan-400 mt-5 ms-[-50]">
-          <MdAdminPanelSettings className="text-3xl ms-8" />
+          <MdAdminPanelSettings className="text-3xl ms-7" />
           Admin
         </div>
       </Link>
