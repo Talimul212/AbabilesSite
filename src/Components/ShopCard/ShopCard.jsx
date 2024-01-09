@@ -1,9 +1,10 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useState } from "react";
 import { MdEdit } from "react-icons/md";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import { CgCalendarDue } from "react-icons/cg";
 const ShopCard = () => {
+  const [paid, setPaid] = useState(0);
   return (
     <div>
       <div className="lg:flex justify-between  gap-5 mt-5 mb-6">
@@ -36,12 +37,33 @@ const ShopCard = () => {
           <div className="card-body justify-center items-center ">
             <div className="flex justify-center items-center gap-16">
               <h2 className="card-title text-cyan-500">Total Paid:-</h2>
-              <RiMoneyDollarCircleLine className="text-cyan-500 font-bold text-2xl hover:text-gray-300 cursor-pointer hover:shadow-xl hover:scale-95 ease-out duration-500 rounded-full" />{" "}
+              <RiMoneyDollarCircleLine
+                onClick={() =>
+                  document.getElementById("my_modal_1").showModal()
+                }
+                className="text-cyan-500 font-bold text-2xl hover:text-gray-300 cursor-pointer hover:shadow-xl hover:scale-95 ease-out duration-500 rounded-full"
+              />{" "}
             </div>
             <p className="text-lg font-medium  pt-4">
               {/* {total} */}
               2000 Tk
             </p>
+          </div>
+        </div>
+        <input type="checkbox" id="my_modal_5" className="modal-toggle" />
+        <div className="modal z-50">
+          <div className="modal-box">
+            <div className="modal-action block">
+              <label
+                htmlFor="my_modal_5"
+                className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+              >
+                X
+              </label>
+              <div className="flex justify-center gap-4 items-center">
+                <div></div>
+              </div>
+            </div>
           </div>
         </div>
         {/* middle input*/}
@@ -91,6 +113,34 @@ const ShopCard = () => {
             </p>
           </div>
         </div>
+        {/* Open the modal using document.getElementById('ID').showModal() method */}
+
+        <dialog id="my_modal_1" className="modal w-[30vw] mx-auto">
+          <div className="modal-box">
+            <form method="dialog">
+              {/* if there is a button in form, it will close the modal */}
+              <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                ✕
+              </button>
+            </form>
+            <h3 className="font-bold text-lg mt-5"></h3>
+            <div className="join">
+              <button
+                disabled={!paid}
+                className="btn join-item rounded-r-full bg-cyan-400"
+              >
+                Paid Money
+              </button>
+              <input
+                onChange={(e) => setPaid(e.target.value)}
+                className="input input-bordered join-item border-cyan-400"
+                placeholder="200 Tk"
+                type="number"
+              />
+            </div>
+            <div className="modal-action"></div>
+          </div>
+        </dialog>
       </div>
     </div>
   );
