@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import SelectMenu from "../SelectMenu/SelectMenu";
@@ -7,11 +8,15 @@ import StoreList from "../StoreList/StoreList";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
-const HomeFrom = () => {
+const HomeFrom = ({ setFormSQ, handleSubtract }) => {
   const [selected, setSelected] = useState(people[0] || {});
   const orderDate = moment().format("LL");
   const { register, handleSubmit, formState, reset } = useForm();
+
   const onSubmit = (data) => {
+    // console.log(data.hight);
+    // console.log(data.weight);
+    setFormSQ(data.hight * data.weight * data.quentity);
     const realData = { ...selected, orderDate, data };
     console.log(realData);
     toast.success(`Successfully order added to ${selected.name} shop`);
@@ -98,6 +103,7 @@ const HomeFrom = () => {
                 <button
                   type="submit"
                   disabled={isSubmitDisabled || !selected}
+                  onClick={handleSubtract}
                   className=" uppercase btn btn-info bg-cyan-400 hover:bg-transparent text-white hover:text-cyan-400"
                 >
                   Add To Shop

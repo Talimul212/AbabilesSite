@@ -195,12 +195,29 @@ const ShopDetails = () => {
               </div>
             </div>
             <button
+              onClick={() => document.getElementById("my_modal_3").showModal()}
               type="button"
+              disabled={!end || !start}
               className="btn btn-accent hover:text-cyan-400 border-2 hover:border-cyan-400 hover:bg-transparent bg-cyan-400 text-white uppercase mt-5 mx-6"
             >
-              print Now
+              perview
             </button>
           </div>
+          {/* You can open the modal using document.getElementById('ID').showModal() method */}
+          <dialog id="my_modal_3" className="modal">
+            <div className="modal-box">
+              <form method="dialog">
+                {/* if there is a button in form, it will close the modal */}
+                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                  ✕
+                </button>
+              </form>
+              <h3 className="font-bold text-lg">Hello!</h3>
+              <p className="py-4">
+                Press ESC key or click on ✕ button to close
+              </p>
+            </div>
+          </dialog>
         </div>
       </div>
     </div>
