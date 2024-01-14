@@ -5,6 +5,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { MdDeleteForever } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import cashTop from "../../assets/cashMemo/Cash Memo.png";
 const ShopDetails = () => {
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
@@ -212,10 +213,10 @@ const ShopDetails = () => {
                   ✕
                 </button>
               </form>
-              <h3 className="font-bold text-lg">Hello!</h3>
-              <p className="py-4">
-                Press ESC key or click on ✕ button to close
-              </p>
+              <h3 className="font-bold text-md  text-center">Cash Memo/Bill</h3>
+              <div className="border-[1px] border-black">
+                <img className="w-[700px] h-28" src={cashTop} alt="" />
+              </div>
             </div>
           </dialog>
         </div>
