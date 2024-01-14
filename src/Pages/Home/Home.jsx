@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import MediaCard from "../../Components/Card/MediaCard";
 import HomeFrom from "../../Components/Form/HomeFrom";
+// import Pdf from "../Pdf";
 
 const Home = () => {
   const [formSQ, setFormSQ] = useState(0);
@@ -25,6 +26,7 @@ const Home = () => {
     <div className="w-[90%] mx-auto ">
       <MediaCard total={total} sq={sq} setTotal={setTotal} setSq={setSq} />
       <HomeFrom handleSubtract={handleSubtract} setFormSQ={setFormSQ} />
+      {/* <Pdf /> */}
     </div>
   );
 };

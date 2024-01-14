@@ -1,11 +1,15 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import ShopCard from "../../Components/ShopCard/ShopCard";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { MdDeleteForever } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import cashTop from "../../assets/cashMemo/Cash Memo.png";
+import CashMemoTable from "../../Components/Table/CashMemoTable";
+import domtoimage from "dom-to-image";
+import jsPDF from "jspdf";
 const ShopDetails = () => {
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
@@ -20,7 +24,22 @@ const ShopDetails = () => {
     //   toast.error("Fail to delete");
     // }
   };
+  const componentRef = useRef();
 
+  const generatePDF = () => {
+    const node = componentRef.current;
+
+    domtoimage
+      .toPng(node)
+      .then((dataUrl) => {
+        const pdf = new jsPDF();
+        pdf.addImage(dataUrl, "PNG", 0, 0, 210, 297); // A4 size: 210mm x 297mm
+        pdf.save("cash-memo.pdf");
+      })
+      .catch((error) => {
+        console.error("Error generating PDF:", error);
+      });
+  };
   const navigate = useNavigate();
 
   const handleEditClick = (item) => {
@@ -206,7 +225,7 @@ const ShopDetails = () => {
           </div>
           {/* You can open the modal using document.getElementById('ID').showModal() method */}
           <dialog id="my_modal_3" className="modal">
-            <div className="modal-box">
+            <div ref={componentRef} className="modal-box w-11/12 max-w-4xl ">
               <form method="dialog">
                 {/* if there is a button in form, it will close the modal */}
                 <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
@@ -214,9 +233,73 @@ const ShopDetails = () => {
                 </button>
               </form>
               <h3 className="font-bold text-md  text-center">Cash Memo/Bill</h3>
-              <div className="border-[1px] border-black">
-                <img className="w-[700px] h-28" src={cashTop} alt="" />
+              <div className="border-[1px] border-black ">
+                <img
+                  className="w-full h-full mt-[-40px]"
+                  src={cashTop}
+                  alt=""
+                />
+                <div className="mx-2 mb-3 flex justify-between items-center ">
+                  <div>
+                    <span className="text-white bg-black py-1 ps-1 pe-5 rounded rounded-e-badge">
+                      NO:
+                    </span>
+                    <span className="text-xl ps-3 font-semibold">201</span>
+                  </div>
+                  <div>
+                    <table>
+                      <tr className="border-2 border-gray-500 text-black">
+                        <td className="border border-gray-500 p-1 font-medium">
+                          Date:
+                        </td>
+                        <td className="border border-gray-500 p-1">20</td>
+                        <td className="border border-gray-500 p-1">12</td>
+                        <td className="border border-gray-500 p-1">2023</td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+                <div className="mx-2 mb-3 flex justify-between items-center">
+                  <div>
+                    <span className="text-white bg-black py-1 ps-1 pe-8 rounded rounded-e-badge">
+                      Name:
+                    </span>
+                  </div>
+                  <div className=" border-b-[2px] text-left fixed left-[106px] w-[30vw] border-black mb-1">
+                    <p className="ps-5 text-xl">Shop name</p>
+                  </div>
+                  <div className="ms-28">
+                    <span className="text-white bg-black py-1 ps-1 pe-5 rounded rounded-e-badge">
+                      Phone:
+                    </span>
+                  </div>
+                  <div className=" border-b-[2px] text-left  ms-[-288px] w-[22vw] border-black  mb-1">
+                    <p className="ps-5 text-xl">01XXXXXXXX</p>
+                  </div>
+                </div>
+                <div className="mx-2 mb-3 flex justify-start">
+                  <div>
+                    <span className="text-white bg-black py-1 ps-1 pe-8 rounded rounded-e-badge">
+                      Address:
+                    </span>
+                  </div>
+                  <div className=" ms-[-9px] border-b-[2px] text-left  w-[100vw] border-black mt-[-5px]">
+                    <p className="ps-5 text-xl">Bandarban sadar local</p>
+                  </div>
+                </div>
+                <CashMemoTable />
+                <p className="my-3 mx-2 font-semibold">Taka In Word:</p>
+                <div className="mt-10 mb-2 mx-2 bg-indigo-600 text-white  flex justify-between items-center rounded px-2 py-1">
+                  <div>Customer's Singature</div>
+                  <div>Authorized Singature</div>
+                </div>
               </div>
+              <button
+                onClick={generatePDF}
+                className="bg-red-500 border-2 hover:border-red-400 text-white hover:text-red-600 hover:bg-transparent p-2 rounded-md  mt-3"
+              >
+                Generate PDF
+              </button>
             </div>
           </dialog>
         </div>
